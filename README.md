@@ -1,352 +1,355 @@
 # 🎓 Azure Databricks Delta Lake Hands-On Workshop
 
-Welcome to the Azure Databricks Delta Lake workshop.
-This hands-on lab will guide you through ingestion, Delta Lake best practices, data optimization, schema evolution, liquid clustering, concurrency management, and security features—all using Unity Catalog and ADLS Gen2.
+Welcome to the **Azure Databricks Delta Lake workshop**! This hands-on lab will guide you through ingestion, Delta Lake best practices, data optimization, schema evolution, liquid clustering, concurrency management, and security features—all using **Unity Catalog** and **ADLS Gen2**.
 
-This workshop is designed for data engineers, architects, and platform administrators looking to deepen their Databricks and Delta Lake skills.
+**Target Audience:** Data engineers, architects, and platform administrators looking to deepen their Databricks and Delta Lake skills.
+
+---
 
 ## 📋 Prerequisites
 
 Before participating, ensure the following requirements are completed by your administrator:
 
-🔐 Unity Catalog Permissions
+### 🔐 Unity Catalog Permissions
 
-Participants must have:
+Participants must have the following permissions:
 
-Permission	Scope	Purpose
-USAGE	Catalog	Allows access to the catalog
-USAGE	Schema	Allows access to schema
-CREATE	Schema	Allows users to create their own schema
-CREATE TABLE, READ FILES, WRITE FILES	External Location	Allows reading/writing to ADLS-backed Delta paths
+| Permission | Scope | Purpose |
+|------------|-------|---------|
+| `USAGE` | Catalog | Allows access to the catalog |
+| `USAGE` | Schema | Allows access to schema |
+| `CREATE` | Schema | Allows users to create their own schema |
+| `CREATE TABLE`, `READ FILES`, `WRITE FILES` | External Location | Allows reading/writing to ADLS-backed Delta paths |
 
-Example grants (admin only):
+**Example grants (admin only):**
 
+```sql
 GRANT USAGE ON CATALOG <catalog> TO <group>;
 GRANT USAGE, CREATE ON DATABASE <catalog>.db1 TO <group>;
 GRANT CREATE TABLE, READ FILES, WRITE FILES ON EXTERNAL LOCATION <location> TO <group>;
+```
 
-🖥️ Workspace Permissions
+### 🖥️ Workspace Permissions
 
-Users automatically receive a personal workspace folder in /Workspace/Users/<email>
-→ No admin action needed
+- ✅ Users automatically receive a personal workspace folder in `/Workspace/Users/<email>`  
+  → *No admin action needed*
+- ✅ Users need **Can Attach To** on the workshop cluster
+- ✅ Users do **not** need cluster edit permissions
 
-Users need Can Attach To on the workshop cluster
-
-Users do not need cluster edit permissions
-
-🗂️ Storage Permissions (ADLS Gen2)
+### 🗂️ Storage Permissions (ADLS Gen2)
 
 If users will upload their own files:
 
-Recommended role at the container level:
-Storage Blob Data Contributor
+**Recommended role at the container level:**  
+`Storage Blob Data Contributor`
 
 This allows:
-✔ browsing folders
-✔ uploading example files
-✔ reading Delta logs
-✔ interacting with Auto Loader paths
+- ✔ Browsing folders
+- ✔ Uploading example files
+- ✔ Reading Delta logs
+- ✔ Interacting with Auto Loader paths
+
+---
 
 ## 🧱 Workshop Structure
 
-This repository contains all notebooks/scripts in the order they will be delivered.
-Below is the module-by-module breakdown.
+This repository contains all notebooks/scripts in the order they will be delivered. Below is the module-by-module breakdown.
 
-## 🚀 Module 01 – ADLS Gen2 Setup (Service Principal Mount / External Location)
+---
 
-Files:
-01-adls-gen2-service-principal-mount.py
+## 🚀 Module 01 – ADLS Gen2 Setup
 
-Topics:
+**Service Principal Mount / External Location**
 
-How ADLS Gen2 is secured
+**Files:**
+- `01-adls-gen2-service-principal-mount.py`
 
-External locations vs mounts
+**Topics:**
+- How ADLS Gen2 is secured
+- External locations vs mounts
+- Storage credentials (Service principal, SAS, MSI)
+- Unity Catalog access enforcement
 
-Storage credentials (Service principal, SAS, MSI)
+---
 
-Unity Catalog access enforcement
+## 📥 Modules 02–06: Data Ingestion
 
-## 📥 Module 02–06: Data Ingestion
-02 – Ingest CSV via COPY INTO
+### 02 – Ingest CSV via COPY INTO
 
-02-Ingest-CSV.sql
+**Files:**
+- `02-Ingest-CSV.sql`
 
-CSV ingestion with schema inference
+**Topics:**
+- CSV ingestion with schema inference
+- Handling corrupt records
+- COPY INTO idempotency
 
-Handling corrupt records
+### 03 – Ingest SQL
 
-COPY INTO idempotency
+**Files:**
+- `03-Ingest-SQL.sql`
 
-03 – Ingest SQL
+**Topics:**
+- Reading relational data into Delta
+- Overwrite vs append
 
-03-Ingest-SQL.sql
+### 04 – Ingest COPY INTO (Advanced)
 
-Reading relational data into Delta
+**Files:**
+- `04-Ingest-CopyInto.sql`
 
-Overwrite vs append
+### 05 – Ingest via Auto Loader (Python + Scala)
 
-04 – Ingest COPY INTO (Advanced)
+**Files:**
+- `05-Ingest-Autoloader.scala`
+- `06_Batch_Reads_Writes.scala`
 
-04-Ingest-CopyInto.sql
+**Topics:**
+- Automatic discovery of new files
+- Checkpointing
+- Schema evolution
 
-05 – Ingest via Auto Loader (Python + Scala)
-
-05-Ingest-Autoloader.scala
-06_Batch_Reads_Writes.scala
-
-Automatic discovery of new files
-
-Checkpointing
-
-Schema evolution
+---
 
 ## 🔄 Module 07 – Change Data Feed (CDF)
 
-Files:
-07-Change data feed demo.py
-Delta Change Data Feed for Seamless CDC Queries.sql
+**Files:**
+- `07-Change data feed demo.py`
+- `Delta Change Data Feed for Seamless CDC Queries.sql`
 
-Topics:
+**Topics:**
+- Enabling CDF
+- Querying changes over time
+- Insert/update/delete tracking
+- Downstream SCD patterns
 
-Enabling CDF
+---
 
-Querying changes over time
+## ⚙️ Modules 08–10: Table Management
 
-Insert/update/delete tracking
+### 08 – OPTIMIZE (Bin-packing & Z-Order)
 
-Downstream SCD patterns
+**Files:**
+- `8_Optimize.sql`
 
-## ⚙️ Module 08–10: Table Management (Optimize, Vacuum, Metadata)
-08 – OPTIMIZE (Bin-packing & Z-Order)
+### 09 – VACUUM (Retention, Risks, Recovery)
 
-8_Optimize.sql
+**Files:**
+- `9_Vacuum.sql`
 
-09 – VACUUM (Retention, Risks, Recovery)
+### 10 – Table Metadata / Describe Detail
 
-9_Vacuum.sql
+**Files:**
+- Embedded in other notebooks
 
-10 – Table Metadata / Describe Detail
+**Topics:**
+- How Z-Ordering works
+- Liquid clustering comparison
+- How Vacuum interacts with deletion vectors
+- Retention tuning for CDF and logs
 
-Embedded in other notebooks
-
-Topics:
-
-How Z-Ordering works
-
-Liquid clustering comparison
-
-How Vacuum interacts with deletion vectors
-
-Retention tuning for CDF and logs
+---
 
 ## 🧬 Module 11 – Cloning (Shallow vs Deep)
 
-File:
-11_Clone.sql
+**Files:**
+- `11_Clone.sql`
 
-Concepts:
+**Concepts:**
+- Instant cloning
+- Zero-copy clones
+- Storage savings
+- Lifecycle isolation
 
-Instant cloning
-
-Zero-copy clones
-
-Storage savings
-
-Lifecycle isolation
+---
 
 ## 📦 Module 12 – Parquet to Delta Conversion
 
-File:
-12-Delta-Parquet.py
+**Files:**
+- `12-Delta-Parquet.py`
 
-Topics:
+**Topics:**
+- Converting existing file-based datasets to Delta
+- Benefits vs Parquet
+- Time travel
 
-Converting existing file-based datasets to Delta
-
-Benefits vs Parquet
-
-Time travel
+---
 
 ## 💥 Module 13 – Restore & Time Travel
 
-File:
-13-Restore-Recover-Table.sql
+**Files:**
+- `13-Restore-Recover-Table.sql`
 
-Topics:
+**Topics:**
+- Delta transaction history
+- Rolling back accidental deletes
+- Data recovery patterns
 
-Delta transaction history
-
-Rolling back accidental deletes
-
-Data recovery patterns
+---
 
 ## 🔌 Module 14 – Concurrency & ACID Guarantees
 
-Files:
-14_Concurrency_Test.py
-14_Concurrency_Test2.py
+**Files:**
+- `14_Concurrency_Test.py`
+- `14_Concurrency_Test2.py`
 
-Concepts:
+**Concepts:**
+- Write serializable isolation
+- Common concurrency conflicts
+- How Delta handles readers vs writers
+- Demonstration of conflict exceptions
 
-Write serializable isolation
-
-Common concurrency conflicts
-
-How Delta handles readers vs writers
-
-Demonstration of conflict exceptions
+---
 
 ## 📊 Module 15 – Data Skipping & File Skipping
 
-File:
-15-DataSkipping.sql
+**Files:**
+- `15-DataSkipping.sql`
 
-Topics:
+**Topics:**
+- Data skipping statistics
+- File pruning
+- Index metadata
 
-Data skipping statistics
-
-File pruning
-
-Index metadata
+---
 
 ## 📏 Module 16 – File Size Management
 
-File:
-16_FileSizeManagement.sql
+**Files:**
+- `16_FileSizeManagement.sql`
 
-Topics:
+**Topics:**
+- Small file problem
+- Auto-compaction
+- WRITE_OPTIONS
+- Optimize Write
 
-Small file problem
+---
 
-Auto-compaction
+## ⚡ Modules 17–18: Liquid Clustering
 
-WRITE_OPTIONS
+**Files:**
+- `17-Optimize-Zorder.sql`
+- `18_Partitioning_Liquid_Cluster.sql`
 
-Optimize Write
+**Topics:**
+- How Liquid Clustering works
+- Partitionless layout
+- Rewriting behavior
+- When to use LC over Z-Order
 
-## ⚡ Module 17 – Liquid Clustering
-
-File:
-17-Optimize-Zorder.sql
-18_Partitioning_Liquid_Cluster.sql
-
-Topics:
-
-How Liquid Clustering works
-
-Partitionless layout
-
-Rewriting behavior
-
-When to use LC over Z-Order
+---
 
 ## 🌸 Module 19 – Bloom Filter Index
 
-File:
-19_Bloomfilter.sql
+**Files:**
+- `19_Bloomfilter.sql`
 
-Topics:
+**Topics:**
+- Improving point lookup performance
+- FPP tuning
+- Index file creation
 
-Improving point lookup performance
-
-FPP tuning
-
-Index file creation
+---
 
 ## 🔐 Module 21 – Row-Level Security (RLS)
 
-File:
-21-Row-Level-Security.py
+**Files:**
+- `21-Row-Level-Security.py`
 
-Topics:
+**Topics:**
+- Dynamic filters
+- Policy functions
+- Multi-tenant enforcement
+- Unity Catalog governance patterns
 
-Dynamic filters
-
-Policy functions
-
-Multi-tenant enforcement
-
-Unity Catalog governance patterns
+---
 
 ## 🧹 Module 22 – Deletion Vectors
 
-File:
-22_Deletion_Vectors.py
+**Files:**
+- `22_Deletion_Vectors.py`
 
-Topics:
+**Topics:**
+- How DV stores delete metadata
+- Differences vs file rewrites
+- Performance benefits
+- DV + Liquid Clustering
 
-How DV stores delete metadata
-
-Differences vs file rewrites
-
-Performance benefits
-
-DV + Liquid Clustering
+---
 
 ## 🔒 Permissions & Setup Reference
 
-File:
-Permissions.py
+**Files:**
+- `Permissions.py`
 
-Contains:
+**Contains:**
+- Quick commands for admins
+- UC grants
+- Storage permissions
+- Cluster attach permissions
 
-Quick commands for admins
-
-UC grants
-
-Storage permissions
-
-Cluster attach permissions
+---
 
 ## 📘 How To Use These Notebooks
-1. Open Databricks Workspace
+
+### 1. Open Databricks Workspace
 
 Navigate to your personal workspace folder:
+```
 /Workspace/Users/<your email>/
+```
 
-2. Import all workshop files
+### 2. Import all workshop files
 
 You may drag-and-drop or import from Git.
 
-3. Start the workshop cluster
+### 3. Start the workshop cluster
 
-Your admin will provide the cluster name.
-Ensure you have Can Attach To permission.
+Your admin will provide the cluster name. Ensure you have **Can Attach To** permission.
 
-4. Run notebooks in numeric order
+### 4. Run notebooks in numeric order
 
-Example:
-01 → 02 → 03 → … → 22
+**Example:**  
+`01` → `02` → `03` → `...` → `22`
 
-5. Every notebook automatically creates its own ADLS path
+### 5. Every notebook automatically creates its own ADLS path
 
 Each notebook uses:
 
+```python
 username = spark.sql("SELECT current_user()").first()[0].split('@')[0]
 base_path = "abfss://bronze@datafoundatstdev001.dfs.core.windows.net/workshop"
 adls_path = f"{base_path}/{username}"
-
+```
 
 This ensures:
-✔ no collisions
-✔ private workspace for each user
-✔ consistent path across all notebooks
+- ✔ No collisions
+- ✔ Private workspace for each user
+- ✔ Consistent path across all notebooks
+
+---
 
 ## 🎯 Expected Outcomes
 
 By the end of this workshop, participants will be able to:
 
-✔ Ingest batch & streaming data into Delta
-✔ Use Delta Lake features (Optimize, Vacuum, Time Travel)
-✔ Understand partitions, Z-Order, and Liquid Clustering
-✔ Handle schema evolution & enforcement
-✔ Set up Change Data Feed
-✔ Understand concurrency & ACID guarantees
-✔ Implement Data Skipping & Bloom Indexes
-✔ Apply Row-Level Security in Unity Catalog
-✔ Manage ADLS-backed Lakehouse structures
+- ✔ Ingest batch & streaming data into Delta
+- ✔ Use Delta Lake features (Optimize, Vacuum, Time Travel)
+- ✔ Understand partitions, Z-Order, and Liquid Clustering
+- ✔ Handle schema evolution & enforcement
+- ✔ Set up Change Data Feed
+- ✔ Understand concurrency & ACID guarantees
+- ✔ Implement Data Skipping & Bloom Indexes
+- ✔ Apply Row-Level Security in Unity Catalog
+- ✔ Manage ADLS-backed Lakehouse structures
+
+---
 
 ## 📞 Support
 
-If you need help during the workshop, please contact your Microsoft Databricks session leads or raise your hand during the lab.
+If you need help during the workshop, please contact your **Microsoft Databricks session leads** or raise your hand during the lab.
+
+---
+
+**Happy Learning! 🚀**
