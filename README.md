@@ -62,7 +62,7 @@ This repository contains all notebooks/scripts in the order they will be deliver
 **Service Principal Mount / External Location**
 
 **Files:**
-- `01-adls-gen2-service-principal-mount.py`
+- `01-adls-gen2-service-principal-mount.ipynb`
 
 **Topics:**
 - How ADLS Gen2 is secured
@@ -77,7 +77,7 @@ This repository contains all notebooks/scripts in the order they will be deliver
 ### 02 – Ingest CSV via COPY INTO
 
 **Files:**
-- `02-Ingest-CSV.sql`
+- `02-Ingest-CSV.ipynb`
 
 **Topics:**
 - CSV ingestion with schema inference
@@ -87,7 +87,7 @@ This repository contains all notebooks/scripts in the order they will be deliver
 ### 03 – Ingest SQL
 
 **Files:**
-- `03-Ingest-SQL.sql`
+- `03-Ingest-SQL.ipynb`
 
 **Topics:**
 - Reading relational data into Delta
@@ -96,13 +96,13 @@ This repository contains all notebooks/scripts in the order they will be deliver
 ### 04 – Ingest COPY INTO (Advanced)
 
 **Files:**
-- `04-Ingest-CopyInto.sql`
+- `04-Ingest-CopyInto.ipynb`
 
-### 05 – Ingest via Auto Loader (Python + Scala)
+### 05 – Ingest via Auto Loader
 
 **Files:**
-- `05-Ingest-Autoloader.scala`
-- `06_Batch_Reads_Writes.scala`
+- `05-Ingest-Autoloader.ipynb`
+- `06_Batch_Reads_Writes.ipynb`
 
 **Topics:**
 - Automatic discovery of new files
@@ -114,8 +114,8 @@ This repository contains all notebooks/scripts in the order they will be deliver
 ## 🔄 Module 07 – Change Data Feed (CDF)
 
 **Files:**
-- `07-Change data feed demo.py`
-- `Delta Change Data Feed for Seamless CDC Queries.sql`
+- `07-Change data feed demo.ipynb`
+- `Delta Change Data Feed for Seamless CDC Queries.ipynb`
 
 **Topics:**
 - Enabling CDF
@@ -130,12 +130,12 @@ This repository contains all notebooks/scripts in the order they will be deliver
 ### 08 – OPTIMIZE (Bin-packing & Z-Order)
 
 **Files:**
-- `8_Optimize.sql`
+- `8_Optimize.ipynb`
 
 ### 09 – VACUUM (Retention, Risks, Recovery)
 
 **Files:**
-- `9_Vacuum.sql`
+- `9_Vacuum.ipynb`
 
 ### 10 – Table Metadata / Describe Detail
 
@@ -153,7 +153,7 @@ This repository contains all notebooks/scripts in the order they will be deliver
 ## 🧬 Module 11 – Cloning (Shallow vs Deep)
 
 **Files:**
-- `11_Clone.sql`
+- `11_Clone.ipynb`
 
 **Concepts:**
 - Instant cloning
@@ -166,7 +166,7 @@ This repository contains all notebooks/scripts in the order they will be deliver
 ## 📦 Module 12 – Parquet to Delta Conversion
 
 **Files:**
-- `12-Delta-Parquet.py`
+- `12-Delta-Parquet.ipynb`
 
 **Topics:**
 - Converting existing file-based datasets to Delta
@@ -178,7 +178,7 @@ This repository contains all notebooks/scripts in the order they will be deliver
 ## 💥 Module 13 – Restore & Time Travel
 
 **Files:**
-- `13-Restore-Recover-Table.sql`
+- `13-Restore-Recover-Table.ipynb`
 
 **Topics:**
 - Delta transaction history
@@ -190,8 +190,8 @@ This repository contains all notebooks/scripts in the order they will be deliver
 ## 🔌 Module 14 – Concurrency & ACID Guarantees
 
 **Files:**
-- `14_Concurrency_Test.py`
-- `14_Concurrency_Test2.py`
+- `14_Concurrency_Test.ipynb`
+- `14_Concurrency_Test2.ipynb`
 
 **Concepts:**
 - Write serializable isolation
@@ -204,7 +204,7 @@ This repository contains all notebooks/scripts in the order they will be deliver
 ## 📊 Module 15 – Data Skipping & File Skipping
 
 **Files:**
-- `15-DataSkipping.sql`
+- `15-DataSkipping.ipynb`
 
 **Topics:**
 - Data skipping statistics
@@ -216,7 +216,7 @@ This repository contains all notebooks/scripts in the order they will be deliver
 ## 📏 Module 16 – File Size Management
 
 **Files:**
-- `16_FileSizeManagement.sql`
+- `16_FileSizeManagement.ipynb`
 
 **Topics:**
 - Small file problem
@@ -229,8 +229,8 @@ This repository contains all notebooks/scripts in the order they will be deliver
 ## ⚡ Modules 17–18: Liquid Clustering
 
 **Files:**
-- `17-Optimize-Zorder.sql`
-- `18_Partitioning_Liquid_Cluster.sql`
+- `17-Optimize-Zorder.ipynb`
+- `18_Partitioning_Liquid_Cluster.ipynb`
 
 **Topics:**
 - How Liquid Clustering works
@@ -243,7 +243,7 @@ This repository contains all notebooks/scripts in the order they will be deliver
 ## 🌸 Module 19 – Bloom Filter Index
 
 **Files:**
-- `19_Bloomfilter.sql`
+- `19_Bloomfilter.ipynb`
 
 **Topics:**
 - Improving point lookup performance
@@ -255,7 +255,7 @@ This repository contains all notebooks/scripts in the order they will be deliver
 ## 🔐 Module 21 – Row-Level Security (RLS)
 
 **Files:**
-- `21-Row-Level-Security.py`
+- `21-Row-Level-Security.ipynb`
 
 **Topics:**
 - Dynamic filters
@@ -268,7 +268,7 @@ This repository contains all notebooks/scripts in the order they will be deliver
 ## 🧹 Module 22 – Deletion Vectors
 
 **Files:**
-- `22_Deletion_Vectors.py`
+- `22_Deletion_Vectors.ipynb`
 
 **Topics:**
 - How DV stores delete metadata
@@ -281,7 +281,7 @@ This repository contains all notebooks/scripts in the order they will be deliver
 ## 🔒 Permissions & Setup Reference
 
 **Files:**
-- `Permissions.py`
+- `Permissions.ipynb`
 
 **Contains:**
 - Quick commands for admins
